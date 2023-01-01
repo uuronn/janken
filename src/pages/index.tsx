@@ -8,6 +8,7 @@ import { JANKEN_VALUE_LIST } from "~/data";
 const Home: NextPage = () => {
   const [myJanken, setMyJanken] = useState<string>();
   const [enemyJanken, setEnemyJanken] = useState<string>();
+  const time = 200;
 
   useEffect(() => {
     setEnemyJanken(
@@ -36,52 +37,70 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (myJanken === "gu") {
       if (enemyJanken === "gu") {
-        alert("グーを出してあいこです");
-        location.reload();
+        setTimeout(() => {
+          alert("グーを出してあいこです");
+          location.reload();
+        }, time);
       }
 
       if (enemyJanken === "choki") {
-        alert("グーを出して勝ちです");
-        location.reload();
+        setTimeout(() => {
+          alert("グーを出して勝ちです");
+          location.reload();
+        }, time);
       }
 
       if (enemyJanken === "pa") {
-        alert("グーを出して負けです");
-        location.reload();
+        setTimeout(() => {
+          alert("グーを出して負けです");
+          location.reload();
+        }, time);
       }
     }
 
     if (myJanken === "choki") {
       if (enemyJanken === "choki") {
-        alert("チョキを出してあいこです");
-        location.reload();
+        setTimeout(() => {
+          alert("チョキを出してあいこです");
+          location.reload();
+        }, time);
       }
 
       if (enemyJanken === "pa") {
-        alert("チョキを出して勝ちです");
-        location.reload();
+        setTimeout(() => {
+          alert("チョキを出して勝ちです");
+          location.reload();
+        }, time);
       }
 
       if (enemyJanken === "gu") {
-        alert("チョキを出して負けです");
-        location.reload();
+        setTimeout(() => {
+          alert("チョキを出して負けです");
+          location.reload();
+        }, time);
       }
     }
 
     if (myJanken === "pa") {
       if (enemyJanken === "pa") {
-        alert("パーを出してあいこです");
-        location.reload();
+        setTimeout(() => {
+          alert("パーを出してあいこです");
+          location.reload();
+        }, time);
       }
 
       if (enemyJanken === "gu") {
-        alert("パーを出して勝ちです");
-        location.reload();
+        setTimeout(() => {
+          alert("パーを出して勝ちです");
+          location.reload();
+        }, time);
       }
 
       if (enemyJanken === "choki") {
-        alert("パーを出して負けです");
-        location.reload();
+        setTimeout(() => {
+          alert("パーを出して負けです");
+          location.reload();
+        }, time);
       }
     }
   }, [myJanken]);
@@ -90,10 +109,10 @@ const Home: NextPage = () => {
     <div css={home}>
       <FlexContainer flexDirection="column" alignItems="center">
         <p css={enemyText}>あいて</p>
-        {myJanken ? (
-          <JankenCard imgPath={`/images/${enemyJanken}.png`} css={enemyCard} />
-        ) : (
+        {!myJanken ? (
           <JankenCard imgPath="/images/question.png" css={enemyCard} />
+        ) : (
+          <JankenCard imgPath={`/images/${enemyJanken}.png`} css={enemyCard} />
         )}
       </FlexContainer>
 
