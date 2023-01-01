@@ -87,7 +87,7 @@ const Home: NextPage = () => {
   }, [myJanken]);
 
   return (
-    <>
+    <div css={home}>
       <FlexContainer flexDirection="column" alignItems="center">
         <p css={enemyText}>あいて</p>
         {myJanken ? (
@@ -102,7 +102,7 @@ const Home: NextPage = () => {
           <JankenCard imgPath={`/images/gu.png`} />
         </button>
       </FlexContainer>
-      <FlexContainer justifyContent="center">
+      <FlexContainer justifyContent="space-around">
         <button onClick={chokiClickHandler}>
           <JankenCard imgPath={`/images/choki.png`} />
         </button>
@@ -111,11 +111,17 @@ const Home: NextPage = () => {
         </button>
       </FlexContainer>
       <p css={enemyText}>じぶん</p>
-    </>
+    </div>
   );
 };
 
 export default Home;
+
+const home = css`
+  width: 100vw;
+  height: 100vh;
+  padding: 30px 16px;
+`;
 
 const enemyText = css`
   text-align: center;

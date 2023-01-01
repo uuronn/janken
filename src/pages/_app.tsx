@@ -7,14 +7,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <DefaultSeo
-        title="next-typescript-template"
+        title="janken-app"
         canonical="サイトの正規のURL"
-        description="デフォルトの説明文"
+        description="じゃんけんアプリ"
         openGraph={{
           type: "website等のタイプ",
-          site_name: "サイト名",
-          title: "next-typescript-template",
-          description: "デフォルトの説明文",
+          site_name: "じゃんけんアプリ",
+          title: "janken-app",
+          description: "じゃんけんアプリ",
           url: "url",
           images: [
             {
