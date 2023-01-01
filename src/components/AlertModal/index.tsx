@@ -21,11 +21,11 @@ export const AlertModal = ({ setIsModal, result }: Props): JSX.Element => {
   );
 };
 
+const baseModal = css`
+  overflow: hidden;
+`;
+
 const modal = css`
   text-align: center;
   font-size: 1.8rem;
-`;
-
-const baseModal = css`
-  overflow: hidden;
 `;
