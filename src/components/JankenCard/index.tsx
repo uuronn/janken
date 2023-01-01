@@ -14,8 +14,8 @@ export const JankenCard = ({ imgPath, ...props }: Props): JSX.Element => {
 };
 
 const card = css`
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
 `;
 
 const img = css`
