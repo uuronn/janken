@@ -15,7 +15,7 @@ export default function document() {
           rel="stylesheet"
         />
       </Head>
-      <body>
+      <body style={{ touchAction: "manipulation" }}>
         <Main />
         <NextScript />
       </body>
