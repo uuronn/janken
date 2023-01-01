@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const [myJanken, setMyJanken] = useState<string>();
   const [isModal, setIsModal] = useState<boolean>(false);
   const [result, setResult] = useState<string>();
-  const [enemyJanken, _] = useState(
+  const [enemyJanken] = useState(
     () =>
       JANKEN_VALUE_LIST[Math.floor(Math.random() * JANKEN_VALUE_LIST.length)]
   );
