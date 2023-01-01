@@ -139,7 +139,7 @@ export default Home;
 const home = css`
   width: 100vw;
   height: 100vh;
-  padding: 30px 16px;
+  padding: 0 16px;
 `;
 
 const enemyText = css`
