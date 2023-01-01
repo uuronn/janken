@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { useRouter } from "next/router";
 import type { Dispatch, SetStateAction } from "react";
 
 import { BaseModal } from "../BaseModal";
@@ -9,9 +10,10 @@ type Props = {
 };
 
 export const AlertModal = ({ setIsModal, result }: Props): JSX.Element => {
+  const router = useRouter();
   const closeHandler = () => {
     setIsModal(false);
-    location.reload();
+    router.reload();
   };
 
   return (

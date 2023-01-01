@@ -15,6 +15,10 @@ const Home: NextPage = () => {
       JANKEN_VALUE_LIST[Math.floor(Math.random() * JANKEN_VALUE_LIST.length)]
   );
 
+  const win = "あなたの 勝ち です！";
+  const draw = "あなたは あいこ です";
+  const lose = "あなたの 負け です。";
+
   const jankenResultFun = (result: string) => {
     setTimeout(() => {
       setIsModal(true);
@@ -27,15 +31,15 @@ const Home: NextPage = () => {
       case "gu":
         switch (enemyJanken) {
           case "gu":
-            jankenResultFun("あなたはあいこです");
+            jankenResultFun(draw);
             break;
 
           case "choki":
-            jankenResultFun("あなたの勝ちです！");
+            jankenResultFun(win);
             break;
 
           case "pa":
-            jankenResultFun("あなたの負けです。");
+            jankenResultFun(lose);
             break;
         }
         break;
@@ -43,15 +47,15 @@ const Home: NextPage = () => {
       case "choki":
         switch (enemyJanken) {
           case "choki":
-            jankenResultFun("あなたはあいこです");
+            jankenResultFun(draw);
             break;
 
           case "pa":
-            jankenResultFun("あなたの勝ちです！");
+            jankenResultFun(win);
             break;
 
           case "gu":
-            jankenResultFun("あなたの負けです。");
+            jankenResultFun(lose);
             break;
         }
         break;
@@ -59,15 +63,15 @@ const Home: NextPage = () => {
       case "pa":
         switch (enemyJanken) {
           case "pa":
-            jankenResultFun("あなたはあいこです");
+            jankenResultFun(draw);
             break;
 
           case "gu":
-            jankenResultFun("あなたの勝ちです！");
+            jankenResultFun(win);
             break;
 
           case "choki":
-            jankenResultFun("あなたの負けです。");
+            jankenResultFun(lose);
             break;
         }
         break;
