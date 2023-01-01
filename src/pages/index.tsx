@@ -1,136 +1,113 @@
 import { css } from "@emotion/react";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
+import { AlertModal } from "~/components/AlertModal";
 import { FlexContainer } from "~/components/FlexContainer";
 import { JankenCard } from "~/components/JankenCard";
 import { JANKEN_VALUE_LIST } from "~/data";
 
 const Home: NextPage = () => {
   const [myJanken, setMyJanken] = useState<string>();
-  const [enemyJanken, setEnemyJanken] = useState<string>();
-  const time = 200;
-
-  useEffect(() => {
-    setEnemyJanken(
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [result, setResult] = useState<string>();
+  const [enemyJanken, _] = useState(
+    () =>
       JANKEN_VALUE_LIST[Math.floor(Math.random() * JANKEN_VALUE_LIST.length)]
-    );
-  }, []);
+  );
 
-  useEffect(() => {
-    if (enemyJanken) {
-      console.log("enemy: ", enemyJanken);
-    }
-  }, [enemyJanken]);
-
-  const guClickHandler = () => {
-    setMyJanken("gu");
-  };
-
-  const chokiClickHandler = () => {
-    setMyJanken("choki");
-  };
-
-  const paClickHandler = () => {
-    setMyJanken("pa");
+  const jankenResultFun = (result: string) => {
+    setTimeout(() => {
+      setIsModal(true);
+      setResult(result);
+    }, 200);
   };
 
   useEffect(() => {
-    if (myJanken === "gu") {
-      if (enemyJanken === "gu") {
-        setTimeout(() => {
-          alert("グーを出してあいこです");
-          location.reload();
-        }, time);
-      }
+    switch (myJanken) {
+      case "gu":
+        switch (enemyJanken) {
+          case "gu":
+            jankenResultFun("あなたはあいこです");
+            break;
 
-      if (enemyJanken === "choki") {
-        setTimeout(() => {
-          alert("グーを出して勝ちです");
-          location.reload();
-        }, time);
-      }
+          case "choki":
+            jankenResultFun("あなたの勝ちです！");
+            break;
 
-      if (enemyJanken === "pa") {
-        setTimeout(() => {
-          alert("グーを出して負けです");
-          location.reload();
-        }, time);
-      }
-    }
+          case "pa":
+            jankenResultFun("あなたの負けです。");
+            break;
+        }
+        break;
 
-    if (myJanken === "choki") {
-      if (enemyJanken === "choki") {
-        setTimeout(() => {
-          alert("チョキを出してあいこです");
-          location.reload();
-        }, time);
-      }
+      case "choki":
+        switch (enemyJanken) {
+          case "choki":
+            jankenResultFun("あなたはあいこです");
+            break;
 
-      if (enemyJanken === "pa") {
-        setTimeout(() => {
-          alert("チョキを出して勝ちです");
-          location.reload();
-        }, time);
-      }
+          case "pa":
+            jankenResultFun("あなたの勝ちです！");
+            break;
 
-      if (enemyJanken === "gu") {
-        setTimeout(() => {
-          alert("チョキを出して負けです");
-          location.reload();
-        }, time);
-      }
-    }
+          case "gu":
+            jankenResultFun("あなたの負けです。");
+            break;
+        }
+        break;
 
-    if (myJanken === "pa") {
-      if (enemyJanken === "pa") {
-        setTimeout(() => {
-          alert("パーを出してあいこです");
-          location.reload();
-        }, time);
-      }
+      case "pa":
+        switch (enemyJanken) {
+          case "pa":
+            jankenResultFun("あなたはあいこです");
+            break;
 
-      if (enemyJanken === "gu") {
-        setTimeout(() => {
-          alert("パーを出して勝ちです");
-          location.reload();
-        }, time);
-      }
+          case "gu":
+            jankenResultFun("あなたの勝ちです！");
+            break;
 
-      if (enemyJanken === "choki") {
-        setTimeout(() => {
-          alert("パーを出して負けです");
-          location.reload();
-        }, time);
-      }
+          case "choki":
+            jankenResultFun("あなたの負けです。");
+            break;
+        }
+        break;
     }
   }, [myJanken]);
 
   return (
-    <div css={home}>
-      <FlexContainer flexDirection="column" alignItems="center">
-        <p css={text}>あいて</p>
-        {!myJanken ? (
-          <JankenCard imgPath="/images/question.png" css={enemyCard} />
-        ) : (
-          <JankenCard imgPath={`/images/${enemyJanken}.png`} css={enemyCard} />
-        )}
-      </FlexContainer>
+    <>
+      <div css={home}>
+        {/* 相手のじゃんけん */}
+        <FlexContainer flexDirection="column" alignItems="center">
+          <p css={text}>あいて</p>
+          {!myJanken ? (
+            <JankenCard imgPath="/images/question.png" css={enemyCard} />
+          ) : (
+            <JankenCard
+              imgPath={`/images/${enemyJanken}.png`}
+              css={enemyCard}
+            />
+          )}
+        </FlexContainer>
 
-      <FlexContainer justifyContent="center">
-        <button onClick={guClickHandler}>
-          <JankenCard imgPath={`/images/gu.png`} />
-        </button>
-      </FlexContainer>
-      <FlexContainer justifyContent="center">
-        <button onClick={chokiClickHandler}>
-          <JankenCard imgPath={`/images/choki.png`} />
-        </button>
-        <button onClick={paClickHandler}>
-          <JankenCard imgPath={`/images/pa.png`} />
-        </button>
-      </FlexContainer>
-      <p css={text}>じぶん</p>
-    </div>
+        {/* 自分のじゃんけん */}
+        <FlexContainer justifyContent="center">
+          <button onClick={() => setMyJanken("gu")}>
+            <JankenCard imgPath={`/images/gu.png`} />
+          </button>
+        </FlexContainer>
+        <FlexContainer justifyContent="center">
+          <button onClick={() => setMyJanken("choki")}>
+            <JankenCard imgPath={`/images/choki.png`} />
+          </button>
+          <button onClick={() => setMyJanken("pa")}>
+            <JankenCard imgPath={`/images/pa.png`} />
+          </button>
+        </FlexContainer>
+        <p css={text}>じぶん</p>
+      </div>
+      {isModal && <AlertModal setIsModal={setIsModal} result={result} />}
+    </>
   );
 };
 
