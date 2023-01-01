@@ -102,7 +102,7 @@ const Home: NextPage = () => {
           <JankenCard imgPath={`/images/gu.png`} />
         </button>
       </FlexContainer>
-      <FlexContainer justifyContent="space-around">
+      <FlexContainer justifyContent="center">
         <button onClick={chokiClickHandler}>
           <JankenCard imgPath={`/images/choki.png`} />
         </button>
