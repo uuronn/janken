@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { AlertModal } from "~/components/AlertModal";
+import { AnimationJankenCard } from "~/components/AnimationJankenCard";
 import { FlexContainer } from "~/components/FlexContainer";
 import { JankenCard } from "~/components/JankenCard";
 import { JANKEN_VALUE_LIST } from "~/data";
@@ -25,6 +26,8 @@ const Home: NextPage = () => {
       setResult(result);
     }, 200);
   };
+
+  console.log(enemyJanken);
 
   useEffect(() => {
     switch (myJanken) {
@@ -83,10 +86,11 @@ const Home: NextPage = () => {
       <div css={home}>
         {/* 相手のじゃんけん */}
         <FlexContainer flexDirection="column" alignItems="center">
-          <p css={text}>あいて</p>
+          <p css={enemyText}>あいて</p>
           {!myJanken ? (
-            <JankenCard imgPath="/images/question.png" css={enemyCard} />
+            <AnimationJankenCard css={enemyJankenCard} />
           ) : (
+            // <JankenCard imgPath="/images/question.png" css={enemyCard} />
             <JankenCard
               imgPath={`/images/${enemyJanken}.png`}
               css={enemyCard}
@@ -117,10 +121,29 @@ const Home: NextPage = () => {
 
 export default Home;
 
+const enemyText = css`
+  text-align: center;
+  font-size: 24px;
+
+  margin-bottom: 200px;
+`;
+
 const home = css`
   width: 100vw;
   height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+  /* width: 100vw;
+  height: 100vh; */
   padding: 0 16px;
+`;
+
+const enemyJankenCard = css`
+  position: absolute;
+  top: -150px;
+  left: 49.6%;
+  transform: translateX(-50%);
 `;
 
 const text = css`
@@ -129,6 +152,9 @@ const text = css`
 `;
 
 const enemyCard = css`
+  position: absolute;
+  top: 40px;
+
   img {
     display: block;
     margin: 0 auto;
