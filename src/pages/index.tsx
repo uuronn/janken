@@ -27,8 +27,6 @@ const Home: NextPage = () => {
     }, 200);
   };
 
-  console.log(enemyJanken);
-
   useEffect(() => {
     switch (myJanken) {
       case "gu":
@@ -88,12 +86,12 @@ const Home: NextPage = () => {
         <FlexContainer flexDirection="column" alignItems="center">
           <p css={enemyText}>あいて</p>
           {!myJanken ? (
-            <AnimationJankenCard css={enemyJankenCard} />
+            <AnimationJankenCard css={animationJankenCard} />
           ) : (
             // <JankenCard imgPath="/images/question.png" css={enemyCard} />
             <JankenCard
               imgPath={`/images/${enemyJanken}.png`}
-              css={enemyCard}
+              css={enemJankenyCard}
             />
           )}
         </FlexContainer>
@@ -121,43 +119,39 @@ const Home: NextPage = () => {
 
 export default Home;
 
-const enemyText = css`
-  text-align: center;
-  font-size: 24px;
-
-  margin-bottom: 200px;
-`;
-
 const home = css`
   width: 100vw;
   height: 100vh;
-
+  padding: 0 16px;
   position: relative;
   overflow: hidden;
-  /* width: 100vw;
-  height: 100vh; */
-  padding: 0 16px;
 `;
 
-const enemyJankenCard = css`
+const enemyText = css`
+  margin-bottom: 200px;
+  font-size: 24px;
+  text-align: center;
+`;
+
+const animationJankenCard = css`
   position: absolute;
   top: -150px;
   left: 49.6%;
   transform: translateX(-50%);
 `;
 
-const text = css`
-  text-align: center;
-  font-size: 24px;
-`;
-
-const enemyCard = css`
+const enemJankenyCard = css`
   position: absolute;
   top: 40px;
 
   img {
-    display: block;
     margin: 0 auto;
+    display: block;
     transform: rotate(180deg);
   }
+`;
+
+const text = css`
+  font-size: 24px;
+  text-align: center;
 `;

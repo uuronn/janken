@@ -12,14 +12,14 @@ export const AnimationJankenCard = ({ ...props }): JSX.Element => {
 };
 
 const border = css`
-  position: absolute;
   width: 123px;
   height: 123px;
-  border: solid 3px #000;
+  position: absolute;
   top: 57px;
   left: 50.4%;
-  transform: translateX(-50%);
+  border: solid 3px #000;
   border-radius: 50%;
+  transform: translateX(-50%);
 `;
 
 const overlay = css`
