@@ -7,7 +7,7 @@ import { FlexContainer } from "~/components/FlexContainer";
 import { JankenCard } from "~/components/JankenCard";
 import { JANKEN_VALUE_LIST } from "~/data";
 
-const Home: NextPage = () => {
+const Home: NextPage = (): JSX.Element => {
   const [myJanken, setMyJanken] = useState<string>();
   const [isModal, setIsModal] = useState<boolean>(false);
   const [result, setResult] = useState<string>();
@@ -21,61 +21,51 @@ const Home: NextPage = () => {
   const lose = "あなたの 負け です。";
 
   const jankenResultFun = (result: string) => {
-    setTimeout(() => {
-      setIsModal(true);
-      setResult(result);
-    }, 200);
+    setResult(result);
+    setIsModal(true);
   };
 
   useEffect(() => {
-    switch (myJanken) {
-      case "gu":
-        switch (enemyJanken) {
-          case "gu":
-            jankenResultFun(draw);
-            break;
+    if (myJanken === enemyJanken) {
+      jankenResultFun(draw);
+    } else {
+      switch (myJanken) {
+        case "gu":
+          switch (enemyJanken) {
+            case "choki":
+              jankenResultFun(win);
+              break;
 
-          case "choki":
-            jankenResultFun(win);
-            break;
+            case "pa":
+              jankenResultFun(lose);
+              break;
+          }
+          break;
 
-          case "pa":
-            jankenResultFun(lose);
-            break;
-        }
-        break;
+        case "choki":
+          switch (enemyJanken) {
+            case "pa":
+              jankenResultFun(win);
+              break;
 
-      case "choki":
-        switch (enemyJanken) {
-          case "choki":
-            jankenResultFun(draw);
-            break;
+            case "gu":
+              jankenResultFun(lose);
+              break;
+          }
+          break;
 
-          case "pa":
-            jankenResultFun(win);
-            break;
+        case "pa":
+          switch (enemyJanken) {
+            case "gu":
+              jankenResultFun(win);
+              break;
 
-          case "gu":
-            jankenResultFun(lose);
-            break;
-        }
-        break;
-
-      case "pa":
-        switch (enemyJanken) {
-          case "pa":
-            jankenResultFun(draw);
-            break;
-
-          case "gu":
-            jankenResultFun(win);
-            break;
-
-          case "choki":
-            jankenResultFun(lose);
-            break;
-        }
-        break;
+            case "choki":
+              jankenResultFun(lose);
+              break;
+          }
+          break;
+      }
     }
   }, [myJanken]);
 
@@ -88,7 +78,6 @@ const Home: NextPage = () => {
           {!myJanken ? (
             <AnimationJankenCard css={animationJankenCard} />
           ) : (
-            // <JankenCard imgPath="/images/question.png" css={enemyCard} />
             <JankenCard
               imgPath={`/images/${enemyJanken}.png`}
               css={enemJankenyCard}
@@ -102,7 +91,7 @@ const Home: NextPage = () => {
             <JankenCard imgPath={`/images/gu.png`} />
           </button>
         </FlexContainer>
-        <FlexContainer justifyContent="center">
+        <FlexContainer justifyContent="center" gap={8}>
           <button onClick={() => setMyJanken("choki")}>
             <JankenCard imgPath={`/images/choki.png`} />
           </button>
@@ -110,7 +99,6 @@ const Home: NextPage = () => {
             <JankenCard imgPath={`/images/pa.png`} />
           </button>
         </FlexContainer>
-        <p css={text}>じぶん</p>
       </div>
       {isModal && <AlertModal setIsModal={setIsModal} result={result} />}
     </>
@@ -149,9 +137,4 @@ const enemJankenyCard = css`
     display: block;
     transform: rotate(180deg);
   }
-`;
-
-const text = css`
-  font-size: 24px;
-  text-align: center;
 `;
