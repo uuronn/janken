@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { AlertModal } from "~/components/AlertModal";
+import { AnimationJankenCard } from "~/components/AnimationJankenCard";
 import { FlexContainer } from "~/components/FlexContainer";
 import { JankenCard } from "~/components/JankenCard";
 import { JANKEN_VALUE_LIST } from "~/data";
@@ -83,13 +84,14 @@ const Home: NextPage = () => {
       <div css={home}>
         {/* 相手のじゃんけん */}
         <FlexContainer flexDirection="column" alignItems="center">
-          <p css={text}>あいて</p>
+          <p css={enemyText}>あいて</p>
           {!myJanken ? (
-            <JankenCard imgPath="/images/question.png" css={enemyCard} />
+            <AnimationJankenCard css={animationJankenCard} />
           ) : (
+            // <JankenCard imgPath="/images/question.png" css={enemyCard} />
             <JankenCard
               imgPath={`/images/${enemyJanken}.png`}
-              css={enemyCard}
+              css={enemJankenyCard}
             />
           )}
         </FlexContainer>
@@ -121,17 +123,35 @@ const home = css`
   width: 100vw;
   height: 100vh;
   padding: 0 16px;
+  position: relative;
+  overflow: hidden;
+`;
+
+const enemyText = css`
+  margin-bottom: 200px;
+  font-size: 24px;
+  text-align: center;
+`;
+
+const animationJankenCard = css`
+  position: absolute;
+  top: -150px;
+  left: 49.6%;
+  transform: translateX(-50%);
+`;
+
+const enemJankenyCard = css`
+  position: absolute;
+  top: 40px;
+
+  img {
+    margin: 0 auto;
+    display: block;
+    transform: rotate(180deg);
+  }
 `;
 
 const text = css`
-  text-align: center;
   font-size: 24px;
-`;
-
-const enemyCard = css`
-  img {
-    display: block;
-    margin: 0 auto;
-    transform: rotate(180deg);
-  }
+  text-align: center;
 `;
