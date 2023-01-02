@@ -16,7 +16,7 @@ const border = css`
   height: 123px;
   position: absolute;
   top: 57px;
-  left: 50.4%;
+  left: 50.4vw;
   border: solid 3px #000;
   border-radius: 50%;
   transform: translateX(-50%);

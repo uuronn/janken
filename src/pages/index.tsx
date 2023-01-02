@@ -41,6 +41,7 @@ const Home: NextPage = (): JSX.Element => {
               break;
           }
           break;
+
         case "choki":
           switch (enemyJanken) {
             case "pa":
@@ -52,6 +53,7 @@ const Home: NextPage = (): JSX.Element => {
               break;
           }
           break;
+
         case "pa":
           switch (enemyJanken) {
             case "gu":
@@ -89,7 +91,7 @@ const Home: NextPage = (): JSX.Element => {
             <JankenCard imgPath={`/images/gu.png`} />
           </button>
         </FlexContainer>
-        <FlexContainer justifyContent="center">
+        <FlexContainer justifyContent="center" gap={8}>
           <button onClick={() => setMyJanken("choki")}>
             <JankenCard imgPath={`/images/choki.png`} />
           </button>
@@ -97,7 +99,6 @@ const Home: NextPage = (): JSX.Element => {
             <JankenCard imgPath={`/images/pa.png`} />
           </button>
         </FlexContainer>
-        <p css={text}>じぶん</p>
       </div>
       {isModal && <AlertModal setIsModal={setIsModal} result={result} />}
     </>
@@ -136,9 +137,4 @@ const enemJankenyCard = css`
     display: block;
     transform: rotate(180deg);
   }
-`;
-
-const text = css`
-  font-size: 24px;
-  text-align: center;
 `;
