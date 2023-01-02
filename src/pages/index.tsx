@@ -6,6 +6,7 @@ import { AnimationJankenCard } from "~/components/AnimationJankenCard";
 import { FlexContainer } from "~/components/FlexContainer";
 import { JankenCard } from "~/components/JankenCard";
 import { JANKEN_VALUE_LIST } from "~/data";
+import { useGetLocalStorage } from "~/hook/useGetLocalStorage";
 
 const Home: NextPage = (): JSX.Element => {
   const [myJanken, setMyJanken] = useState<string>();
@@ -15,6 +16,9 @@ const Home: NextPage = (): JSX.Element => {
     () =>
       JANKEN_VALUE_LIST[Math.floor(Math.random() * JANKEN_VALUE_LIST.length)]
   );
+
+  const { localMyBest, localMyBestCounter, localMyBestReset } =
+    useGetLocalStorage();
 
   const win = "あなたの 勝ち です！";
   const draw = "あなたは あいこ です";
@@ -26,6 +30,10 @@ const Home: NextPage = (): JSX.Element => {
   };
 
   useEffect(() => {
+    console.log("fdf", localMyBest);
+  }, [localMyBest]);
+
+  useEffect(() => {
     if (myJanken === enemyJanken) {
       jankenResultFun(draw);
     } else {
@@ -34,10 +42,12 @@ const Home: NextPage = (): JSX.Element => {
           switch (enemyJanken) {
             case "choki":
               jankenResultFun(win);
+              localMyBestCounter();
               break;
 
             case "pa":
               jankenResultFun(lose);
+              localMyBestReset();
               break;
           }
           break;
@@ -46,10 +56,12 @@ const Home: NextPage = (): JSX.Element => {
           switch (enemyJanken) {
             case "pa":
               jankenResultFun(win);
+              localMyBestCounter();
               break;
 
             case "gu":
               jankenResultFun(lose);
+              localMyBestReset();
               break;
           }
           break;
@@ -58,10 +70,12 @@ const Home: NextPage = (): JSX.Element => {
           switch (enemyJanken) {
             case "gu":
               jankenResultFun(win);
+              localMyBestCounter();
               break;
 
             case "choki":
               jankenResultFun(lose);
+              localMyBestReset();
               break;
           }
           break;
@@ -84,6 +98,8 @@ const Home: NextPage = (): JSX.Element => {
             />
           )}
         </FlexContainer>
+
+        <p css={counter}>連続勝利数：{localMyBest}</p>
 
         {/* 自分のじゃんけん */}
         <FlexContainer justifyContent="center">
@@ -137,4 +153,9 @@ const enemJankenyCard = css`
     display: block;
     transform: rotate(180deg);
   }
+`;
+
+const counter = css`
+  font-size: 20px;
+  text-align: center;
 `;
