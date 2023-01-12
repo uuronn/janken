@@ -30,10 +30,6 @@ const Home: NextPage = (): JSX.Element => {
   };
 
   useEffect(() => {
-    console.log("fdf", localMyBest);
-  }, [localMyBest]);
-
-  useEffect(() => {
     if (myJanken === enemyJanken) {
       jankenResultFun(draw);
     } else {

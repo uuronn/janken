@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "~/data";
 
 export const useGetLocalStorage = () => {
   const [localMyBest, setLocalMyBest] = useState<number>(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const storage: number = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_KEY) as string
     );
