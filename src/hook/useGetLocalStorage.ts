@@ -2,14 +2,17 @@ import { useLayoutEffect, useState } from "react";
 import { LOCAL_MY_BEST_KEY } from "~/data";
 
 export const useGetLocalStorage = () => {
-  const [localMyBest, setLocalMyBest] = useState<number>(0);
+  const [localMyBest, setLocalMyBest] = useState<number>();
 
   useLayoutEffect(() => {
     const storage: number = JSON.parse(
       localStorage.getItem(LOCAL_MY_BEST_KEY) as string
     );
 
-    if (storage === null) return;
+    if (storage === null) {
+      setLocalMyBest(0);
+      return;
+    }
 
     setLocalMyBest(storage);
   }, []);
