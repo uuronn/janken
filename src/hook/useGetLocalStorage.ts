@@ -1,12 +1,12 @@
 import { useLayoutEffect, useState } from "react";
-import { LOCAL_STORAGE_KEY } from "~/data";
+import { LOCAL_MY_BEST_KEY } from "~/data";
 
 export const useGetLocalStorage = () => {
-  const [localMyBest, setLocalMyBest] = useState<number>(0);
+  const [localMyBest, setLocalMyBest] = useState<number>();
 
   useLayoutEffect(() => {
     const storage: number = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) as string
+      localStorage.getItem(LOCAL_MY_BEST_KEY) as string
     );
 
     if (storage === null) {
@@ -19,15 +19,15 @@ export const useGetLocalStorage = () => {
 
   const localMyBestCounter = () => {
     if (!localMyBest) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(1));
+      localStorage.setItem(LOCAL_MY_BEST_KEY, JSON.stringify(1));
       return;
     }
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localMyBest + 1));
+    localStorage.setItem(LOCAL_MY_BEST_KEY, JSON.stringify(localMyBest + 1));
   };
 
   const localMyBestReset = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    localStorage.removeItem(LOCAL_MY_BEST_KEY);
   };
 
   return { localMyBest, localMyBestCounter, localMyBestReset };
